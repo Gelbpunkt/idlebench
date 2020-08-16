@@ -4,8 +4,8 @@ import (
 	"flag"
 	"log"
 
-	"github.com/domterion/idlebench/postgres"
-	"github.com/domterion/idlebench/redis"
+	psql "github.com/domterion/idlebench/postgres/golang"
+	redis "github.com/domterion/idlebench/redis/golang"
 )
 
 func main() {
@@ -17,7 +17,7 @@ func main() {
 	case "redis":
 		redis.DoTest()
 	case "psql":
-		postgres.DoTest()
+		psql.DoTest()
 	default:
 		log.Fatal("Please add a `--test=[psql|redis]` flag.")
 	}

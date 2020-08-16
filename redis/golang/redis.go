@@ -1,10 +1,9 @@
-package redis
+package golang
 
 import (
 	"context"
 	"encoding/json"
 	"log"
-	"time"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -31,7 +30,6 @@ func DoTest() {
 		log.Fatal("Error when running Redis bench, ", err)
 	}
 
-	start := time.Now()
 	for i := 0; i < 100000; i++ {
 		val, err := redis.Get(ctx, "bench").Result()
 
@@ -55,7 +53,6 @@ func DoTest() {
 			log.Fatal("Error when running Redis bench, ", err)
 		}
 	}
-	duration := time.Since(start)
 
-	log.Println("Took ", duration)
+	log.Println("Done")
 }
