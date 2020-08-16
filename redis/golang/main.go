@@ -53,6 +53,4 @@ func main() {
 			log.Fatal("Error when running Redis bench, ", err)
 		}
 	}
-
-	log.Println("Done")
 }
