@@ -40,6 +40,8 @@ The example row data used for the benchmark is identical to the Redis JSON as a 
 
 color is a custom type `public.rgba` with keys and values like the JSON.
 
+The full schema can be seen in the schema.sql file.
+
 The program should:
 * Connect to the PostgreSQL server at the default port with the user name "postgres" and password "postgres" on database "postgres"
 * Then, loop 100,000 times:
