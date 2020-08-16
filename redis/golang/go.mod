@@ -1,4 +1,4 @@
-module github.com/domterion/idlebench
+module github.com/domterion/idlebench/redis/go
 
 go 1.14
 

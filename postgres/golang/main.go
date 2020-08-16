@@ -1,9 +1,9 @@
-package golang
+package main
 
 import (
 	"fmt"
 )
 
-func DoTest() {
+func main() {
 	fmt.Println("Test")
 }
