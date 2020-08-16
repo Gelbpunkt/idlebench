@@ -4,6 +4,7 @@ import (
 	"flag"
 	"log"
 
+	"github.com/domterion/idlebench/postgres"
 	"github.com/domterion/idlebench/redis"
 )
 
@@ -16,7 +17,7 @@ func main() {
 	case "redis":
 		redis.DoTest()
 	case "psql":
-		log.Println("test")
+		postgres.DoTest()
 	default:
 		log.Fatal("Please add a `--test=[psql|redis]` flag.")
 	}
