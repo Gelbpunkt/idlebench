@@ -13,7 +13,9 @@ For example:
 * redis/python/ for a Redis Python implementation
 * redis/python-asyncio/ for a Redis Python implementation based on AsyncIO
 
-Benchmarks should ship with a Dockerfile that will be used to benchmark the implementation with the Unix "time" command-line tool.
+Benchmarks should ship with a Dockerfile that will be used to benchmark the implementation with the Unix "time" command-line tool. As this benchmark suite is aimed at container applications, alpine-based Dockerfiles would be preferred.
+
+Benchmarks should be single-threaded, async programming and microthreads would be favorable.
 
 ## The Redis Benchmark
 
