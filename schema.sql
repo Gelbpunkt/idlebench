@@ -6,7 +6,7 @@ CREATE TYPE public.rgba AS (
 );
 
 CREATE TABLE public.profile (
-    "user" bigint NOT NULL PRIMARY KEY,
+    "user" bigint NOT NULL,
     name character varying(20),
     money bigint,
     xp integer,
