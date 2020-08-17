@@ -65,4 +65,6 @@ module Crystal
     encoded = parsed.to_json
     redis.set("bench", encoded)
   end
+
+  redis.close
 end
