@@ -44,7 +44,7 @@ The full schema can be seen in the schema.sql file.
 
 The program should:
 * Connect to the PostgreSQL server at the default port with the user name "postgres" and password "postgres" on database "postgres"
-* Then, loop 100,000 times:
+* Then, loop 1,000 times:
     * Insert the example row data into the table public.profile 100 times
     * Select one row where "user" equals 356091260429402122
     * Update all rows where "user" equals 356091260429402122 by increasing "crates_common" and "crates_uncommon" by 1
