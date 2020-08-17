@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"log"
-	"time"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -76,7 +75,6 @@ func main() {
 		log.Fatal("Error when running Redis bench, ", err)
 	}
 
-	start := time.Now()
 	for i := 0; i < 100000; i++ {
 		val, err := redis.Get(ctx, "bench").Result()
 
@@ -99,7 +97,6 @@ func main() {
 			log.Fatal("Error when running Redis bench, ", err)
 		}
 	}
-	elapsed := time.Since(start)
 
-	log.Println("Done, ", elapsed)
+	log.Println("Done")
 }
