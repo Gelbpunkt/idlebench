@@ -4,9 +4,55 @@ import (
 	"context"
 	"encoding/json"
 	"log"
+	"time"
 
 	"github.com/go-redis/redis/v8"
 )
+
+type colour struct {
+	Red   uint    `json:"red"`
+	Blue  uint    `json:"blue"`
+	Green uint    `json:"green"`
+	Alpha float32 `json:"alpha"`
+}
+
+type Profile struct {
+	User            uint64   `json:"user"`
+	Name            string   `json:"name"`
+	Money           uint32   `json:"money"`
+	Xp              uint32   `json:"xp"`
+	Pvpwins         uint32   `json:"pvpwins"`
+	Moneybooster    uint32   `json:"money_booster"`
+	Timebooster     uint32   `json:"time_booster"`
+	Luckbooster     uint32   `json:"luck_booster"`
+	Marriage        uint64   `json:"marriage"`
+	Background      string   `json:"background"`
+	Guild           uint32   `json:"guild"`
+	Class           []string `json:"class"`
+	Deaths          uint32   `json:"deaths"`
+	Completed       uint32   `json:"completed"`
+	Lovescore       uint32   `json:"lovescore"`
+	Guildrank       string   `json:"guildrank"`
+	Backgrounds     []string `json:"backgrounds"`
+	Puzzles         uint     `json:"puzzles"`
+	Atkmultiply     string   `json:"atkmultiply"`
+	Defmultiply     string   `json:"defmultiply"`
+	Cratescommon    uint32   `json:"crates_common"`
+	Cratesuncommon  uint32   `json:"crates_uncommon"`
+	Cratesrare      uint32   `json:"crates_rare"`
+	Cratesmagic     uint32   `json:"crates_magic"`
+	Crateslegendary uint32   `json:"crates_legendary"`
+	Luck            string   `json:"string"`
+	God             string   `json:"god"`
+	Favor           uint16   `json:"favor"`
+	Race            string   `json:"race"`
+	Cv              uint     `json:"cv"`
+	Resetpoints     uint     `json:"reset_points"`
+	Chocolates      uint16   `json:"chocolates"`
+	Trickortreat    uint16   `json:"trickortreat"`
+	Eastereggs      uint16   `json:"eastereggs"`
+	Colour          colour   `json:"colour"`
+}
 
 var (
 	ctx = context.Background()
@@ -30,6 +76,7 @@ func main() {
 		log.Fatal("Error when running Redis bench, ", err)
 	}
 
+	start := time.Now()
 	for i := 0; i < 100000; i++ {
 		val, err := redis.Get(ctx, "bench").Result()
 
@@ -38,21 +85,21 @@ func main() {
 			break
 		}
 
-		var result map[string]interface{}
+		var profile Profile
 
-		// Unmarshal or Decode the JSON to the interface.
-		json.Unmarshal([]byte(val), &result)
+		json.Unmarshal([]byte(val), &profile)
 
-		result["crates_common"] = result["crates_common"].(float64) + 1
-		result["crates_uncommon"] = result["crates_uncommon"].(float64) + 1
+		profile.Cratescommon++
+		profile.Cratesuncommon++
 
-		e, _ := json.Marshal(result)
+		e, _ := json.Marshal(profile)
 
 		err = redis.Set(ctx, "bench", e, 0).Err()
 		if err != nil {
 			log.Fatal("Error when running Redis bench, ", err)
 		}
 	}
+	elapsed := time.Since(start)
 
-	log.Println("Done")
+	log.Println("Done, ", elapsed)
 }
