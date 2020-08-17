@@ -16,11 +16,8 @@ async function main() {
     json.crates_uncommon += 1;
 
     await client.set("bench", JSON.stringify(json));
-
-    if (i + 1 === TIMES) {
-      await client.end({ flush: true });
-    }
   }
+  await client.quit();
 }
 
 main();
