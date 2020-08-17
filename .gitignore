@@ -1,1 +1,5 @@
 redis/rust-async-std/target
+redis/crystal/docs/
+redis/crystal/lib/
+redis/crystal/bin/
+redis/crystal/.shards/
