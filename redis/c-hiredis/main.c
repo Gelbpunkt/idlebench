@@ -8,6 +8,9 @@ const char* bench = "{\"user\":356091260429402122,\"name\":\"Why are you reading
 // Main Function
 int main( int argc, char** argv )
 {
+    char *newjson;
+    newjson = malloc(sizeof(bench) + 32);                                       // allocate the memory for the jobj string
+    
     redisReply   *reply;                                                  // Redis reply
     redisContext *context = redisConnect("LOCALHOST", 6379);              // Connect to redis and start a redis context
     if (!context) { printf("Failed to connect to redis\n"); return -1; }  // Check to make sure the connection was successfull
@@ -37,7 +40,6 @@ int main( int argc, char** argv )
         json_object *jUncommonInt = json_object_new_int(uncommon + 1);                                  // Create new json int object for uncommon
         json_object_object_add(jobj, "crates_common", jCommonInt);                                      // Add the common int json object field to the jobj
         json_object_object_add(jobj, "crates_uncommon", jUncommonInt);                                  // Add the uncommon int json object field to the jobj
-        char *newjson = malloc(json_object_get_string_len(jobj));                                       // allocate the memory for the jobj string
         newjson = json_object_get_string(jobj);                                                         // Convert the jobj to string
 
         reply = redisCommand(context, "SET bench %s", newjson);                      // Send the redis command to set the new json string
@@ -49,10 +51,11 @@ int main( int argc, char** argv )
             { printf("FAILED to send redis command on iter %d\n", i); }              // Print error message to console
         }
 
-        free(newjson);          // Free the memory for the string
+        // free(newjson);          // Free the memory for the string
         freeReplyObject(reply); // Free the reply object
     }
     
+    free(newjson);
     redisFree(context);                     // Disconnect and free the redis context
     return 0;                               // Exit the program
 }
