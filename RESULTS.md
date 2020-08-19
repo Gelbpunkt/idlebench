@@ -11,6 +11,7 @@ On an Intel Core i7 6700T running Redis 6.0.6 in a container, the results are as
 | rust-async-std | 6.03s  | 2.87s  | 2.26s |
 | crystal        | 7.03s  | 3.68s  | 2.40s |
 | nodejs         | 7.32s  | 3.82s  | 2.14s |
+| c-hiredis      | 9.84s  | 4.69s  | 2.14s |
 
 This is with each benchmark running 5 times, taking the best result by "real" value.
 
